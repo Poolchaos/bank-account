@@ -1,0 +1,82 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item nav-link">
+            Acme Bank
+          </li>
+        </ul>
+        <div class="dropdown-divider"></div>
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item text-light">
+            <a class="nav-link d-inline text-light" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="text-center my-5">
+  <div class="container">
+    <div class="card">
+      <div *ngIf="user">
+        <h2>Account List</h2>
+        <ngx-ui-loader [loaderId]="'loader'"></ngx-ui-loader>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Account Number</th>
+                <th scope="col">Account Type</th>
+                <th scope="col">Balance</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let acc of accounts">
+                <th scope="row">{{acc.account_number}}</th>
+                <td>{{acc.account_type}}</td>
+                <td>{{acc.balance}}</td>
+                <td *ngIf="!acc.active" class="width-25">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    [disabled]="acc.balance <= -20 ? true: false"
+                    (click)="enableWithdraw(acc.account_number)"
+                  >Withdraw</button>
+                </td>
+                <td *ngIf="acc.active" class="width-25">
+                  <form [formGroup]="withdrawForm" (ngSubmit)="withdraw(acc.account_number)">
+                    <div class="form-group row">
+                        <input
+                              id="username"
+                              type="number"
+                              placeholder="Enter Amount"
+                              formControlName="amount"
+                              class="form-control col-11"
+                              [ngClass]="{ 'is-invalid': submitted && withdrawData.amount.errors }" />
+
+                        <div *ngIf="submitted && withdrawData.amount.errors" class="invalid-feedback">
+                            <div *ngIf="withdrawData.amount.errors.required">Please enter an ammount</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="loading" class="btn btn-primary">withdraw</button>
+                        <div class="btn btn-secondary" (click)="cancelWithdraw()">Cancel</div>
+                        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    </div>
+                    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</main>

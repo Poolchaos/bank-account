@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+}
+
+body {
+  background: url("https://mdbootstrap.com/img/Photos/Others/img (51).jpg")no-repeat center center;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .view {
+    overflow: visible;
+    margin-top: -56px;
+  }
+}
+
+.navbar {
+  z-index: 1;
+}
+
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+}
+
+.nav-link {
+  cursor: pointer;
+}
