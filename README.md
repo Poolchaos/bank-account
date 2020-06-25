@@ -19,5 +19,5 @@ The application consists of a mock login page to simulate a loggen in experience
 
 # Outstanding work
 
-- Put test plans in place
+- Put test plans / Unit tests in place
 - JWT token authentication on rest calls
