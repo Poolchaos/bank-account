@@ -6,6 +6,5 @@ import { Directive } from '@angular/core';
 export class LoaderDirective {
 
   constructor() {
-    console.log(' ::>> loader initialised');
   }
 }

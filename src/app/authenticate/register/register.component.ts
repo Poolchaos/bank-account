@@ -44,16 +44,13 @@ export class RegisterComponent implements OnInit {
       username: this.registerData.username.value,
       password: this.registerData.password.value
     };
-    console.log('::>> register', payload);
     this.authenticationService.register(payload)
       .pipe(first())
       .subscribe(
         data => {
-          console.log(' registration passed ', data);
           this.router.navigate(['login']);
         },
         error => {
-          console.log(' >>>> error = ', error);
           if (error === 'Bad Request') {
             this.error = 'Username already taken.';
           }

@@ -64,7 +64,6 @@ export class ApplicationComponent implements OnInit {
   }
 
   private handleContentRetrievalError(error: string): void {
-    console.log(error);
     this.stopLoader();
   }
 
@@ -93,8 +92,6 @@ export class ApplicationComponent implements OnInit {
     const balance = account.balance;
 
     if (this.hasBalance(balance)) {
-
-      console.log('');
 
       if (this.isWithinOverdraft(balance, amount)) {
         alert('Success');
