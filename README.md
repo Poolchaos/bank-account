@@ -16,3 +16,8 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Application
 
 The application consists of a mock login page to simulate a loggen in experience.
+
+# Outstanding work
+
+- Put test plans in place
+- JWT token authentication on rest calls
