@@ -1,6 +1,6 @@
-# Absa Assessment
+# Bank account
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
+This project is to display the functionality for viewing a bank account.
 
 ## Basic Setup
 run $`npm install` to install all the required dependencies.
